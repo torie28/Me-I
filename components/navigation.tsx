@@ -155,7 +155,7 @@ export function Navigation() {
         <div className="md:hidden flex flex-1 justify-end items-center">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-[#121212] p-2"
+            className="text-[#e0952f] p-2"
             aria-label="Toggle mobile menu"
           >
             {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
