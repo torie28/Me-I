@@ -17,6 +17,7 @@ const flavors = [
     bgColor: "from-[#6BA82E]/20 via-[#6BA82E]/10 to-transparent",
     accentColor: "#6BA82E",
     badges: ["No Preservatives", "Small Batch", "Farm Surplus", "Ready to Cook"],
+    mystery: false,
   },
   {
     id: 2,
@@ -27,6 +28,7 @@ const flavors = [
     bgColor: "from-[#84cc16]/20 via-[#84cc16]/10 to-transparent",
     accentColor: "#84cc16",
     badges: ["Single Ingredient", "Air Dried", "No Sugar", "Vitamin Rich"],
+    mystery: false,
   },
   {
     id: 3,
@@ -37,6 +39,7 @@ const flavors = [
     bgColor: "from-[#a3b18a]/25 via-[#a3b18a]/10 to-transparent",
     accentColor: "#5A8F29",
     badges: ["Vitamin C", "Single Ingredient", "No Additives", "Small Batch"],
+    mystery: false,
   },
   {
     id: 4,
@@ -47,6 +50,7 @@ const flavors = [
     bgColor: "from-[#f59e0b]/20 via-[#f59e0b]/10 to-transparent",
     accentColor: "#e5533d",
     badges: ["Hot & Sweet", "No Preservatives", "Farm Surplus", "Bold Flavour"],
+    mystery: false,
   },
 ]
 
@@ -63,7 +67,7 @@ const slideVariants = {
     scale: 1,
     rotateY: 0,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 300,
       damping: 30,
     },
@@ -74,7 +78,7 @@ const slideVariants = {
     scale: 0.9,
     rotateY: direction > 0 ? -15 : 15,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 300,
       damping: 30,
     },
@@ -84,6 +88,7 @@ const slideVariants = {
 export function FlavorCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [[page, direction], setPage] = useState([0, 0])
+  const [isCardHovered, setIsCardHovered] = useState(false)
   const currentFlavor = flavors[currentIndex]
 
   const rotateX = useSpring(0, { stiffness: 150, damping: 20 })
@@ -188,10 +193,19 @@ export function FlavorCarousel() {
                 style={{ perspective: 1000 }}
               >
                 <motion.div
-                  className={`bg-white rounded-3xl p-6 md:p-8 border-2 border-[#121212]/10 shadow-xl ${currentFlavor.mystery ? "relative overflow-hidden" : ""}`}
-                  style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+                  className={`rounded-3xl p-6 md:p-8 border-2 border-[#121212]/10 shadow-xl transition-colors duration-300 ${currentFlavor.mystery ? "relative overflow-hidden" : ""}`}
+                  onMouseEnter={() => setIsCardHovered(true)}
+                  onMouseLeave={() => {
+                    handleMouseLeave()
+                    setIsCardHovered(false)
+                  }}
                   onMouseMove={handleMouseMove}
-                  onMouseLeave={handleMouseLeave}
+                  style={{
+                    rotateX,
+                    rotateY,
+                    transformStyle: "preserve-3d",
+                    backgroundColor: isCardHovered ? `${currentFlavor.accentColor}15` : "white",
+                  }}
                 >
                   {currentFlavor.mystery && (
                     <motion.div
@@ -236,7 +250,7 @@ export function FlavorCarousel() {
                           {currentFlavor.tagline}
                         </motion.span>
                         <motion.h3
-                          className="text-3xl md:text-4xl font-black text-[#121212] tracking-tighter mt-1"
+                          className="text-3xl md:text-4xl font-black text-[#e0952f] tracking-tighter mt-1"
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.3, type: "spring", stiffness: 100 }}
@@ -270,26 +284,6 @@ export function FlavorCarousel() {
                             </span>
                           ))}
                         </motion.div>
-                      )}
-
-                      {!currentFlavor.mystery && (
-                        <motion.button
-                          className="px-6 py-3 rounded-full font-bold text-sm tracking-wide w-full md:w-auto relative overflow-hidden"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                          style={{ backgroundColor: currentFlavor.accentColor, color: "#121212" }}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                        >
-                          <motion.span
-                            className="absolute inset-0 bg-white/20"
-                            initial={{ x: "-100%" }}
-                            whileHover={{ x: "100%" }}
-                            transition={{ duration: 0.5 }}
-                          />
-                          <span className="relative z-10">Add to Cart</span>
-                        </motion.button>
                       )}
 
                       {currentFlavor.mystery && (

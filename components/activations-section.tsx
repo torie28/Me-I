@@ -1,74 +1,42 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
-import { Store, Truck, Leaf, Utensils } from "lucide-react"
+import { motion } from "framer-motion"
+import Image from "next/image"
 
-const activations = [
+const partners = [
   {
-    icon: Store,
-    title: "Retail & Grocers",
-    description: "Stock the Me & I range in your store. Wholesale cases available.",
-    cta: "Become a Stockist",
+    name: "SIDO",
+    logo: "/logo/sido.png",
   },
   {
-    icon: Utensils,
-    title: "Chefs & Kitchens",
-    description: "Fresh pastes, powders and sauces for restaurants and cafes.",
-    cta: "Order Bulk",
+    name: "MVIWAARUSHA",
+    logo: "/logo/MVIWAARUSHA_id-1.png",
   },
   {
-    icon: Leaf,
-    title: "Farmer Partners",
-    description: "Have surplus crops? We'll turn them into value, not waste.",
-    cta: "Supply With Us",
+    name: "Kilimo",
+    logo: "/logo/kilimo.svg",
   },
   {
-    icon: Truck,
-    title: "Home Delivery",
-    description: "Get the full range delivered to your door across the region.",
-    cta: "Shop Online",
+    name: "Rikolto",
+    logo: "/logo/6724da99e9fddae255646fd5_rikolto-logo_color-rgb.jpg",
+  },
+  {
+    name: "Islands of Peace",
+    logo: "/logo/Islands of Peace (Iles de Paix).png",
   },
 ]
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.15,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 20,
-    },
-  },
-}
-
 export function ActivationsSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-
   return (
-    <section id="stockists" className="relative py-16 bg-white overflow-hidden">
+    <section id="partners" className="relative py-20 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-          className="text-center mb-10"
+          className="text-center mb-14"
         >
           <motion.span
             className="font-mono text-[#121212]/60 text-xs tracking-widest inline-block"
@@ -77,7 +45,7 @@ export function ActivationsSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            WORK WITH US
+            TRUSTED BY
           </motion.span>
           <h2 className="text-3xl md:text-5xl font-black text-[#121212] tracking-tighter mt-2 overflow-hidden">
             <motion.span
@@ -85,92 +53,83 @@ export function ActivationsSection() {
               initial={{ y: 100 }}
               whileInView={{ y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.2 }}
+              transition={{
+                duration: 0.6,
+                ease: [0.25, 0.4, 0.25, 1],
+                delay: 0.2,
+              }}
             >
-              FIND{" "}
+              OUR{" "}
             </motion.span>
             <motion.span
               className="text-[#6BA82E] inline-block"
               initial={{ y: 100 }}
               whileInView={{ y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.3 }}
+              transition={{
+                duration: 0.6,
+                ease: [0.25, 0.4, 0.25, 1],
+                delay: 0.3,
+              }}
             >
-              ME &amp; I
+              PARTNERS
             </motion.span>
           </h2>
           <motion.p
-            className="text-sm text-[#121212]/60 font-mono mt-2 max-w-xl mx-auto"
+            className="text-sm text-[#121212]/60 font-mono mt-3 max-w-xl mx-auto"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.4 }}
           >
-            From grocers to farmers to your kitchen table &mdash; there&apos;s a place for you in the Me &amp; I story.
+            We collaborate with leading organizations to drive sustainable
+            agroecological transformation.
           </motion.p>
+
+          {/* Animated underline */}
+          <motion.div
+            className="h-[2px] w-12 bg-[#6BA82E] mx-auto mt-4 rounded-full"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 0.6,
+              delay: 0.5,
+              ease: [0.25, 0.4, 0.25, 1],
+            }}
+          />
         </motion.div>
 
-        <motion.div
-          ref={ref}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-4"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-        >
-          {activations.map((activation, index) => (
-            <motion.div
-              key={activation.title}
-              variants={itemVariants}
-              whileHover={{
-                y: -8,
-                scale: 1.02,
-                transition: { type: "spring", stiffness: 400, damping: 17 },
-              }}
-              className="group bg-[#121212] rounded-2xl p-6 cursor-pointer relative overflow-hidden"
-            >
-              <motion.div
-                className="absolute inset-0 bg-[#6BA82E]/0 group-hover:bg-[#6BA82E]"
-                transition={{ duration: 0.4 }}
-              />
+        {/* Marquee */}
+        <div className="relative">
+          {/* Fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
-              <div className="relative z-10">
-                <motion.div
-                  className="w-11 h-11 rounded-xl bg-[#6BA82E] flex items-center justify-center mb-4 group-hover:bg-[#121212] transition-colors duration-300"
-                  whileHover={{ rotate: 10, scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
-                  <activation.icon className="w-5 h-5 text-[#121212] group-hover:text-[#6BA82E] transition-colors duration-300" />
-                </motion.div>
-
-                <h3 className="text-lg font-black text-white group-hover:text-[#121212] tracking-tight mb-2 transition-colors duration-300">
-                  {activation.title}
-                </h3>
-                <p className="text-white/60 group-hover:text-[#121212]/60 font-mono text-xs leading-relaxed mb-4 transition-colors duration-300">
-                  {activation.description}
-                </p>
-
-                <motion.button
-                  className="flex items-center gap-2 text-[#6BA82E] group-hover:text-[#121212] font-bold text-xs tracking-wide transition-colors duration-300"
-                  whileHover={{ x: 4 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
-                  {activation.cta}
-                  <motion.svg
-                    className="w-3 h-3"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    initial={{ x: 0 }}
-                    whileHover={{ x: 4 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          <div className="overflow-hidden">
+            <div className="flex items-center gap-16 animate-marquee w-max">
+              {/* Render the logo set four times for seamless looping */}
+              {[...partners, ...partners, ...partners, ...partners].map(
+                (partner, index) => (
+                  <div
+                    key={`${partner.name}-${index}`}
+                    className="flex-shrink-0 group"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </motion.svg>
-                </motion.button>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+                    <div className="relative h-16 w-36 flex items-center justify-center transition-all duration-500 hover:scale-110">
+                      <Image
+                        src={partner.logo}
+                        alt={partner.name}
+                        fill
+                        className="object-contain"
+                        sizes="144px"
+                      />
+                    </div>
+                  </div>
+                )
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

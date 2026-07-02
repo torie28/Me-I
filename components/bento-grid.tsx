@@ -9,22 +9,22 @@ import { Recycle, Sprout, Users, Package } from "lucide-react"
 const features = [
   {
     icon: Recycle,
-    title: "12T",
-    subtitle: "Surplus Rescued",
+    title: "1 Solution",
+    subtitle: "Many Benefits",
     description: "Crops saved from waste each year",
     accent: "#6BA82E",
   },
   {
     icon: Users,
-    title: "40+",
-    subtitle: "Partner Farms",
-    description: "Smallholders paid fair prices",
+    title: "Saves Money",
+    subtitle: "For Farmers",
+    description: "Simple and User-Friendly farming",
     accent: "#e0952f",
   },
   {
     icon: Sprout,
-    title: "1",
-    subtitle: "Ingredient",
+    title: "1 Ingredient",
+    subtitle: "Simple Recipe",
     description: "Single-origin, nothing added",
     accent: "#5A8F29",
   },
@@ -32,7 +32,7 @@ const features = [
     icon: Package,
     title: "100%",
     subtitle: "Small Batch",
-    description: "Made fresh, never mass-produced",
+    description: "Made fresh, Going Green with Organic",
     accent: "#6BA82E",
   },
 ]
@@ -90,7 +90,10 @@ function FeatureCard({ feature, index }: { feature: (typeof features)[0]; index:
       />
 
       {/* Card */}
-      <div className="relative bg-[#1a1a1a] rounded-2xl p-5 border border-white/10 overflow-hidden h-full">
+      <div 
+        className="relative rounded-3xl p-5 border-2 border-[#121212]/10 shadow-lg overflow-hidden h-full transition-colors duration-300"
+        style={{ backgroundColor: isHovered ? `${feature.accent}15` : 'white' }}
+      >
         {/* Shine effect on hover */}
         <motion.div
           className="absolute inset-0 opacity-0 group-hover:opacity-100"
@@ -98,11 +101,11 @@ function FeatureCard({ feature, index }: { feature: (typeof features)[0]; index:
           animate={
             isHovered
               ? {
-                  background: [
-                    "linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.03) 25%, transparent 30%)",
-                    "linear-gradient(105deg, transparent 70%, rgba(255,255,255,0.03) 75%, transparent 80%)",
-                  ],
-                }
+                background: [
+                  "linear-gradient(105deg, transparent 20%, rgba(0,0,0,0.02) 25%, transparent 30%)",
+                  "linear-gradient(105deg, transparent 70%, rgba(0,0,0,0.02) 75%, transparent 80%)",
+                ],
+              }
               : {}
           }
           transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
@@ -130,7 +133,7 @@ function FeatureCard({ feature, index }: { feature: (typeof features)[0]; index:
           {/* Title with count-up feel */}
           <div className="flex-1">
             <motion.div
-              className="text-3xl font-black tracking-tight text-white"
+              className="text-3xl font-black tracking-tight text-[#121212]"
               initial={{ opacity: 0, scale: 0.5 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -138,8 +141,8 @@ function FeatureCard({ feature, index }: { feature: (typeof features)[0]; index:
             >
               <span style={{ color: feature.accent }}>{feature.title}</span>
             </motion.div>
-            <h3 className="text-sm font-semibold text-white mt-1">{feature.subtitle}</h3>
-            <p className="text-xs text-white/50 mt-1 font-mono">{feature.description}</p>
+            <h3 className="text-sm font-semibold text-[#121212] mt-1">{feature.subtitle}</h3>
+            <p className="text-xs text-[#121212]/60 mt-1 font-mono">{feature.description}</p>
           </div>
 
           {/* Bottom accent line */}
@@ -162,8 +165,8 @@ export function BentoGrid() {
   const isInView = useInView(ref, { once: true, margin: "-50px" })
 
   return (
-    <section id="impact" className="relative py-16 bg-[#121212] overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#121212] via-[#0a0a0a] to-[#121212]" />
+    <section id="impact" className="relative py-16 bg-white overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-white via-[#6BA82E]/5 to-white" />
 
       <div ref={ref} className="max-w-5xl mx-auto px-6 relative z-10">
         <motion.div
@@ -183,7 +186,7 @@ export function BentoGrid() {
 
           <div className="overflow-hidden mt-2">
             <motion.h2
-              className="text-3xl md:text-4xl font-black text-white tracking-tight"
+              className="text-3xl md:text-4xl font-black text-[#121212] tracking-tight"
               initial={{ y: 60 }}
               animate={isInView ? { y: 0 } : { y: 60 }}
               transition={{ duration: 0.6, ease: [0.25, 0.4, 0.25, 1], delay: 0.15 }}

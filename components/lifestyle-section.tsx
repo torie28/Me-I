@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, Variants } from "framer-motion"
 import { useRef } from "react"
 
 const lifestyleImages = [
@@ -18,7 +18,7 @@ const socialPosts = [
   { handle: "@techbro_sam", text: "Finally an energy drink that doesn't taste like chemicals", likes: "956" },
 ]
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -29,7 +29,7 @@ const containerVariants = {
   },
 }
 
-const imageVariants = {
+const imageVariants: Variants = {
   hidden: { opacity: 0, scale: 0.8, y: 40 },
   visible: {
     opacity: 1,
@@ -43,7 +43,7 @@ const imageVariants = {
   },
 }
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 30, scale: 0.95 },
   visible: {
     opacity: 1,
@@ -120,9 +120,8 @@ export function LifestyleSection() {
                 zIndex: 10,
                 transition: { type: "spring", stiffness: 300, damping: 20 },
               }}
-              className={`relative overflow-hidden rounded-2xl bg-white/5 ${
-                img.aspect === "portrait" ? "row-span-2" : ""
-              } ${img.aspect === "landscape" ? "col-span-2" : ""}`}
+              className={`relative overflow-hidden rounded-2xl bg-white/5 ${img.aspect === "portrait" ? "row-span-2" : ""
+                } ${img.aspect === "landscape" ? "col-span-2" : ""}`}
             >
               <div
                 className={`${img.aspect === "portrait" ? "aspect-[3/4]" : img.aspect === "landscape" ? "aspect-[16/9]" : "aspect-square"} relative group`}

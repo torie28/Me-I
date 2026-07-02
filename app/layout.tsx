@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Inter, JetBrains_Mono } from "next/font/google"
+import { Inter, JetBrains_Mono, Cormorant_Garamond } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { LenisProvider } from "@/components/lenis-provider"
 import ClickSpark from "@/components/click-spark"
@@ -14,6 +14,12 @@ const _inter = Inter({
 const _jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
+})
+
+const _cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-serif",
 })
 
 export const metadata: Metadata = {
@@ -31,6 +37,9 @@ export const metadata: Metadata = {
     "Me & I",
   ],
   generator: "v0.app",
+  icons: {
+    icon: "/logo/me%26i%20logo%20white.png",
+  },
 }
 
 export const viewport: Viewport = {
@@ -44,7 +53,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans antialiased`}>
+      <body className={`${_cormorantGaramond.variable} font-serif antialiased`}>
         <ClickSpark
           sparkColor="#6BA82E"
           sparkSize={12}

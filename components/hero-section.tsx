@@ -14,7 +14,7 @@ const fadeUpVariants = {
     transition: {
       delay: i * 0.1,
       duration: 0.8,
-      ease: [0.25, 0.4, 0.25, 1],
+      ease: [0.25, 0.4, 0.25, 1] as [number, number, number, number],
     },
   }),
 }
@@ -26,7 +26,7 @@ const scaleInVariants = {
     scale: 1,
     rotate: 0,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 100,
       damping: 20,
       delay: 0.3,
@@ -106,7 +106,7 @@ export function HeroSection() {
             <div className="space-y-1 overflow-hidden">
               <motion.h1
                 style={{ x: textX1 }}
-                className="text-5xl md:text-7xl font-black tracking-tighter text-[#121212] leading-[0.9]"
+                className="text-5xl md:text-7xl font-black tracking-tighter text-[#e0952f] leading-[0.9]"
               >
                 <motion.span
                   variants={fadeUpVariants}
@@ -139,7 +139,7 @@ export function HeroSection() {
                 custom={3}
                 className="text-lg md:text-xl font-mono text-[#121212]/60 tracking-tight pt-2 max-w-md"
               >
-                {"Me & I upcycles farm surplus into pantry staples \u2014 garlic paste, fruit powders and chili sauces."}
+                {"Process surplus crops into value-added products such as spice powders, dried seasonings, and sauces."}
               </motion.p>
             </div>
 
@@ -150,38 +150,7 @@ export function HeroSection() {
               custom={4}
               className="flex flex-wrap gap-3 pt-2"
             >
-              <motion.button
-                className="bg-[#6BA82E] text-[#121212] px-6 py-3 rounded-full font-bold text-sm tracking-wide flex items-center gap-2 group relative overflow-hidden"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full"
-                  whileHover={{ x: "200%" }}
-                  transition={{ duration: 0.6 }}
-                />
-                <span className="relative z-10">Shop the Range</span>
-                <motion.svg
-                  className="w-4 h-4 relative z-10"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  initial={{ x: 0 }}
-                  whileHover={{ x: 4 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </motion.svg>
-              </motion.button>
-              <motion.button
-                className="border-2 border-[#121212] text-[#121212] px-6 py-3 rounded-full font-bold text-sm tracking-wide relative overflow-hidden"
-                whileHover={{ scale: 1.02, backgroundColor: "#121212", color: "#fff" }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                Our Story
-              </motion.button>
+
             </motion.div>
 
             <motion.div
@@ -241,25 +210,6 @@ export function HeroSection() {
           </motion.div>
         </div>
 
-        <motion.div
-          className="absolute bottom-6 left-1/2 -translate-x-1/2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-          >
-            <div className="w-5 h-8 border-2 border-[#121212]/30 rounded-full flex justify-center pt-1.5">
-              <motion.div
-                className="w-1 h-2 bg-[#121212]/30 rounded-full"
-                animate={{ y: [0, 6, 0], opacity: [1, 0.5, 1] }}
-                transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-              />
-            </div>
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   )

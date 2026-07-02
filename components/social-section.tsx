@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, Variants } from "framer-motion"
 import { useRef } from "react"
 import { Instagram } from "lucide-react"
 import Image from "next/image"
@@ -14,7 +14,7 @@ const instagramPosts = [
   { image: "/gallery/cooking.png", likes: "2.1k" },
 ]
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -25,7 +25,7 @@ const containerVariants = {
   },
 }
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, scale: 0.8, y: 20 },
   visible: {
     opacity: 1,
@@ -44,8 +44,10 @@ export function SocialSection() {
   const isInView = useInView(ref, { once: true, margin: "-50px" })
 
   return (
-    <section id="story" className="relative py-16 bg-[#121212] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="story" className="relative py-16 bg-white overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-white via-[#6BA82E]/5 to-white" />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -62,7 +64,7 @@ export function SocialSection() {
           >
             FROM FARM TO JAR
           </motion.span>
-          <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter mt-2 overflow-hidden">
+          <h2 className="text-3xl md:text-5xl font-black text-[#121212] tracking-tighter mt-2 overflow-hidden">
             <motion.span
               className="inline-block"
               initial={{ y: 100 }}
@@ -127,32 +129,6 @@ export function SocialSection() {
               </motion.div>
             </motion.div>
           ))}
-        </motion.div>
-
-        <motion.div
-          className="flex justify-center mt-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-        >
-          <motion.a
-            href="https://instagram.com/meandi.foods"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-[#6BA82E] text-[#121212] px-6 py-3 rounded-full font-bold text-sm tracking-wide relative overflow-hidden group"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full"
-              whileHover={{ x: "200%" }}
-              transition={{ duration: 0.6 }}
-            />
-            <Instagram className="w-4 h-4 relative z-10" />
-            <span className="relative z-10">Follow @meandi.foods</span>
-          </motion.a>
         </motion.div>
       </div>
     </section>
